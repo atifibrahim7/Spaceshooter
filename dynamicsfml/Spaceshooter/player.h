@@ -22,7 +22,7 @@ public:
 	{
 		for (int i = 0; i < 50; i++)
 		{
-			std::cout << "Bullet created " << i<<std::endl; 
+		//	std::cout << "Bullet created " << i<<std::endl; 
 			b[i] = new Bullet();
 			b[i]->x = -100;
 			b[i]->y = -100;
@@ -34,8 +34,9 @@ public:
 		x = 340; y = 700;
 		sprite.setPosition(x, y);
 		sprite.setScale(0.75, 0.75);
+		
 	}
-
+	
 
 
 	void fire(float time)
@@ -47,8 +48,8 @@ public:
 
 			for (int i = 0; i < 50; i++) {
 				if (b[i]->y < 0) {
-					b[i]->x = sprite.getPosition().x + 35;
-					b[i]->y = sprite.getPosition().y - 25;
+					b[i]->x = sprite.getPosition().x  + 70;
+					b[i]->y = sprite.getPosition().y ;
 					b[i]->sprite.setPosition(b[i]->x, b[i]->y);
 					break;
 				}
@@ -59,7 +60,7 @@ public:
 			if (b[i]->y >= 0) {
 				b[i]->move();
 				if (b[i]->y < 0) {
-					std::cout << "Bullet out of screen " << i << "\n";
+				//	std::cout << "Bullet out of screen " << i << "\n";
 					b[i]->x = -100;
 					b[i]->y = -100;
 					b[i]->sprite.setPosition(b[i]->x, b[i]->y);
@@ -132,6 +133,8 @@ public:
 
 		delta_x *= speed;
 		delta_y *= speed;
+		x = sprite.getPosition().x;
+		y = sprite.getPosition().y;
 
 		sprite.move(delta_x, delta_y);
 	}

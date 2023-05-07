@@ -4,6 +4,7 @@
 #include <time.h>
 #include "player.h"
 #include "Enemy.h"
+#include "Addon.h"
 const char title[] = "OOP-Project, Spring-2023";
 using namespace sf;
 
@@ -11,18 +12,28 @@ class Game
 {
 public:
 
-    Sprite background; //Game background sprite
-    Texture bg_texture;
+    Sprite background, shield; //Game background sprite
+    Texture bg_texture , shield_texture;
     Player* p; //player 
+    Addons** Addon_;
+    bool isShieldActive = false;
     //Enemy* E; //Enemy object
     // add other game attributes
     // Menu * m; //Menu object
 
 
     Game()
-    {
+    {   
+       
+        Addon_ = new Addons *[5];
+        
+        Addon_[0] = new ShieldAddon();
+        shield_texture.loadFromFile("img/PNG/Effects/shield1.png");
+        shield.setTexture(shield_texture);
         p = new Player("img/player_ship.png");
         bg_texture.loadFromFile("img/background.jpg");
+            // Addones loading sprites 
+        
       //  E = new Enemy();
         background.setTexture(bg_texture);
         background.setScale(2.0, 1.75);
@@ -35,6 +46,7 @@ public:
         window.setFramerateLimit(60);
         Clock clock, clock1;
         float timer = 0;
+        float shieldtimer = 0;
 
         while (window.isOpen())
         {
@@ -68,6 +80,13 @@ public:
             p->rotate();
             p->wraparound();
             p->fire(time);
+
+            if (Addon_[0]->apply(*p))
+            {
+                isShieldActive = true;
+                std::cout << " Collision 11";
+            }
+          Addon_[0]->drop();
             
             //E->fire();
             //////////////////////////////////////////////
@@ -75,24 +94,25 @@ public:
             window.clear(Color::Black); //clears the screen
             window.draw(background);  // setting background
             window.draw(p->sprite);   // setting player on screen
-            // set bullet on screen only when space is pressed
-            static int bulletcounter = 0;
-            //    if(Keyboard::isKeyPressed(Keyboard::Space))
-            //     {   
-            //         for(int i = 0 ; i < 50 ; i++)
-            //       {  window.draw(p->b[i]->sprite);
-            //       }
-            //         bulletcounter++;
-            //     }
-
-            //     if(bulletcounter>0  )
-            //     {
-            //         for(int i = 0 ; i < 50 ; i++)
-            //         window.draw(p->b[i]->sprite);
-            //     }
+            if (isShieldActive)
+            { 
+                shield.setPosition(p->x -20,p->y-30);
+                window.draw(shield);
+                shieldtimer += time;
+              //  std::cout << shieldtimer<<"\n";
+                
+                if (shieldtimer > 4.0f) {
+                    isShieldActive = false;
+                    shield.setPosition(-150, -100);
+                    shieldtimer = 0;
+                }
+            }
+   
             if (p->b)
                 for (int j = 0; j < 50; j++)
                     window.draw(p->b[j]->sprite);
+            if (Addon_[0])
+                Addon_[0]->draw(window);
             /* if(timer >2 )
             {
                 window.draw(E->sprite);

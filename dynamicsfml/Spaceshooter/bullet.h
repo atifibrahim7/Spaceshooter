@@ -16,9 +16,10 @@ public:
 
     Bullet()
     {
-        Tex.loadFromFile("img/PNG/Lasers/laserBlue12.png");
+        Tex.loadFromFile("img/PNG/BulletSprite.png");
         sprite.setTexture(Tex);
-        sprite.setScale(1, 1);
+      sprite.setRotation(90); 
+        sprite.setScale(0.5, 0.5);
         x = 0;
         y = 0;
         bullet_damage = 100;
@@ -29,7 +30,7 @@ public:
     }
     void move()
     {
-        y -= 10;
+        y -= 7;
         sprite.setPosition(x, y);
     }
     void move_down()
