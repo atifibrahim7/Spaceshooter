@@ -25,9 +25,8 @@ public:
     Game()
     {   
        
-        Addon_ = new Addons *[5];
-        
-        Addon_[0] = new ShieldAddon();
+        Addon_ = new Addons * [5] {new ShieldAddon() , new LivesAddon() , new DangerAddon()};
+     
         shield_texture.loadFromFile("img/PNG/Effects/shield1.png");
         shield.setTexture(shield_texture);
         p = new Player("img/player_ship.png");
@@ -47,6 +46,7 @@ public:
         Clock clock, clock1;
         float timer = 0;
         float shieldtimer = 0;
+        
 
         while (window.isOpen())
         {
@@ -80,13 +80,19 @@ public:
             p->rotate();
             p->wraparound();
             p->fire(time);
-
+            
             if (Addon_[0]->apply(*p))
             {
                 isShieldActive = true;
-                std::cout << " Collision 11";
+                std::cout << " Collision shield";
             }
-          Addon_[0]->drop();
+            for(int i = 1 ; i < 3 ; i++)
+            if (Addon_[i]->apply(*p))
+                std::cout << "Addon picked" <<p->lives;
+            for (int i = 0; i < 3; i++)
+            {
+                Addon_[i]->drop();
+            }
             
             //E->fire();
             //////////////////////////////////////////////
@@ -112,8 +118,11 @@ public:
                 for (int j = 0; j < 50; j++)
                     window.draw(p->b[j]->sprite);
             if (Addon_[0])
-                Addon_[0]->draw(window);
-            /* if(timer >2 )
+            {
+              for(int i = 0 ; i < 3 ; i++)
+                Addon_[i]->draw(window);
+            }
+                /* if(timer >2 )
             {
                 window.draw(E->sprite);
             }*/

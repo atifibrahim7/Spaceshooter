@@ -41,7 +41,7 @@ public:
                     std::cout << Mouse::getPosition(window).x << " " << Mouse::getPosition(window).y << std::endl;
                     Vector2u windowSize = window.getSize();
 
-                    if (mousePos.x >= 350 && mousePos.x <= 550 && mousePos.y >= 320 && mousePos.y <= 370)
+                    if (mousePos.x >= 350 && mousePos.x <= 550 && mousePos.y >= 320 && mousePos.y <= 400)
                     {
                         // Start the game
                         window.close();

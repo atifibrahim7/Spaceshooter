@@ -10,7 +10,7 @@ class Player
 {
 public:
 	Bullet* b[50]; // Bullet object
-
+	int lives; 
 	Texture tex;
 	Sprite sprite;
 	float speed = 7.5;
@@ -28,6 +28,7 @@ public:
 			b[i]->y = -100;
 			b[i]->sprite.setPosition(b[i]->x, b[i]->y);
 		}
+		lives = 7;
 
 		tex.loadFromFile(png_path);
 		sprite.setTexture(tex);
@@ -37,7 +38,7 @@ public:
 		
 	}
 	
-
+	
 
 	void fire(float time)
 	{
