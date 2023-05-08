@@ -43,7 +43,7 @@ public:
 	void fire(float time)
 	{
 		timer += time;
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && timer > 0.2)
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && timer > 0.3)
 		{
 			timer = 0;
 

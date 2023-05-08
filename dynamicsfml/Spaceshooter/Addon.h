@@ -179,3 +179,52 @@ public :
 		window.draw(sprite);
 	}
 };
+
+class FireAddon : public Addons
+{
+protected:
+	Texture Tex;
+	Sprite sprite;
+	int x;
+	int y;
+
+public:
+	FireAddon()
+	{
+		Tex.loadFromFile("img/PNG/Power-ups/things_gold.png");
+		sprite.setTexture(Tex);
+		x = 300;
+		y = 2500;
+		sprite.setPosition(x, y);
+	}
+	void drop() override
+	{
+		sprite.move(0, 6);
+		x = sprite.getPosition().x;
+		y = sprite.getPosition().y;
+		if (y > 900)
+			sprite.setPosition(randomDrop() % 900, -2500);
+
+	}
+	bool apply(Player& player) override
+	{
+		//std::cout << "player " << player.x << " " << player.y <<"       "<<x <<" "<<y<<std::endl;
+
+
+		if (sprite.getGlobalBounds().intersects(player.sprite.getGlobalBounds()))
+		{
+			std::cout << "Lol Collision \n";
+			sprite.setPosition(randomDrop() % 900, -1800);
+			
+			sprite.setPosition(randomDrop() % 900, -2000);
+
+			return true;
+
+		}
+		return false;
+	}
+	void draw(RenderWindow& window)
+	{
+		window.draw(sprite);
+	}
+};

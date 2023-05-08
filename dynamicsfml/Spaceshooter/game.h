@@ -25,7 +25,7 @@ public:
     Game()
     {   
        
-        Addon_ = new Addons * [5] {new ShieldAddon() , new LivesAddon() , new DangerAddon()};
+        Addon_ = new Addons * [4] {new ShieldAddon() , new LivesAddon() , new DangerAddon() , new FireAddon()};
      
         shield_texture.loadFromFile("img/PNG/Effects/shield1.png");
         shield.setTexture(shield_texture);
@@ -46,7 +46,8 @@ public:
         Clock clock, clock1;
         float timer = 0;
         float shieldtimer = 0;
-        
+        float firetimer = shieldtimer;
+        bool fireaddonflag = false;
 
         while (window.isOpen())
         {
@@ -86,10 +87,50 @@ public:
                 isShieldActive = true;
                 std::cout << " Collision shield";
             }
-            for(int i = 1 ; i < 3 ; i++)
-            if (Addon_[i]->apply(*p))
-                std::cout << "Addon picked" <<p->lives;
-            for (int i = 0; i < 3; i++)
+            if (fireaddonflag)
+            {
+                firetimer += time;
+            }
+            for (int i = 1; i < 4; i++)
+            {
+                
+                  if (Addon_[3]->apply(*p))
+                  {
+                      std::cout << "timer start ";
+                      fireaddonflag = true;
+                    
+                    for (int i = 0; i < 50; i++)
+                    {
+                        p->b[i]->Tex.loadFromFile("img/PNG/Lasers/laserGreen02.png");
+                        p->b[i]->sprite.setTexture(p->b[i]->Tex);
+                        p->b[i]->sprite.setRotation(90);
+
+                        std::cout << "Texture changed ";
+                        p->b[i]->sprite.setScale(1, 0.1);
+                        
+                    }
+                    break;
+
+                }
+                else if (Addon_[i]->apply(*p))
+                std::cout << "Addon picked" << p->lives;
+            }
+            std::cout << firetimer << "\n";
+            if (firetimer > 5.0f)
+            {
+                std::cout << "in if statement";
+                firetimer = 0;
+                fireaddonflag = false;
+                for (int i = 0; i < 50; i++)
+                {
+                    p->b[i]->Tex.loadFromFile("img/PNG/BulletSprite.png");
+                    p->b[i]->sprite.setTexture(p->b[i]->Tex);
+                    p->b[i]->sprite.setRotation(90);
+                    p->b[i]->sprite.setScale(0.5, 0.5);
+                }
+             //   firetimer = 0;
+            }
+            for (int i = 0; i < 4; i++)
             {
                 Addon_[i]->drop();
             }
@@ -119,7 +160,7 @@ public:
                     window.draw(p->b[j]->sprite);
             if (Addon_[0])
             {
-              for(int i = 0 ; i < 3 ; i++)
+              for(int i = 0 ; i < 4 ; i++)
                 Addon_[i]->draw(window);
             }
                 /* if(timer >2 )
