@@ -58,7 +58,7 @@ class ShieldAddon : public Addons
 		if (sprite.getGlobalBounds().intersects(player.sprite.getGlobalBounds())) 
 		{
 			std::cout << "Haha Collision \n";
-			sprite.setPosition(x, -1800);
+			sprite.setPosition(randomDrop() % 900, -1800);
 			return true;
 			
 		}
@@ -67,15 +67,18 @@ class ShieldAddon : public Addons
 	void drop() override
 	{
 		sprite.move(0, 5);
+		//std::cout << x << " " << y<<std::endl;
 		x = sprite.getPosition().x;
 		y = sprite.getPosition().y;
 		if (y > 900)
-			sprite.setPosition(randomDrop()  % 900, 00);
+		{	
+			sprite.setPosition(randomDrop() % 900, -2900);
+		
+		}
 		
 	}
-	void draw(RenderWindow& window) override
-	{	
-		//std::cout << "Drawing sheild drop out";
+	void draw(RenderWindow& window)
+	{
 		window.draw(sprite);
 	}
 };
@@ -105,7 +108,7 @@ public :
 		{
 			std::cout << "Haha Collision \n";
 			sprite.setPosition(randomDrop() % 900, -1800);
-			if (player.lives < 10)
+			if (player.lives < 3)
 				player.lives += 1;
 			sprite.setPosition(randomDrop() % 900, -2000);
 			return true;

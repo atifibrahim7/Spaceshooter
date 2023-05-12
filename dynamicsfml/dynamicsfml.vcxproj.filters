@@ -27,10 +27,19 @@
     <ClInclude Include="Spaceshooter\bullet.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="Spaceshooter\dragon.h">
+    <ClInclude Include="Spaceshooter\monster.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Spaceshooter\Addon.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Spaceshooter\invader.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Spaceshooter\Enemy.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Spaceshooter\bomb.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

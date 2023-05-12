@@ -1,25 +1,28 @@
 #pragma once 
 
 #include <SFML/Graphics.hpp>
-
+#include"Enemy.h"
 #include<string.h>
 using namespace sf;
 
 class Bullet
 {   
+protected:
     int bullet_damage;
 public:
     Sprite sprite;
     Texture Tex;
     int x;
     int y;
-
+    bool active;
+    friend class Enemy;
     Bullet()
-    {
-        Tex.loadFromFile("img/PNG/BulletSprite.png");
+    {   
+        active = true;
+        Tex.loadFromFile("img/PNG/Lasers/laser.png");
         sprite.setTexture(Tex);
       sprite.setRotation(90); 
-        sprite.setScale(0.5, 0.5);
+        sprite.setScale(1, 1);
         x = 0;
         y = 0;
         bullet_damage = 100;
@@ -40,5 +43,11 @@ public:
     }
     
     ~Bullet(){}
+    bool isActive()
+    {
+        return active;
+    }
 
+  
 };
+

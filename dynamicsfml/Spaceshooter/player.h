@@ -3,12 +3,14 @@
 #include <SFML/Graphics.hpp>
 #include<string.h>
 #include "bullet.h"
+#include "Enemy.h"
 #include <iostream>
 
 using namespace sf;
 class Player
 {
 public:
+	friend class Enemy;
 	Bullet* b[50]; // Bullet object
 	int lives; 
 	Texture tex;
@@ -28,7 +30,7 @@ public:
 			b[i]->y = -100;
 			b[i]->sprite.setPosition(b[i]->x, b[i]->y);
 		}
-		lives = 7;
+		lives = 3;
 
 		tex.loadFromFile(png_path);
 		sprite.setTexture(tex);
@@ -43,7 +45,7 @@ public:
 	void fire(float time)
 	{
 		timer += time;
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && timer > 0.3)
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && timer > 0.1)
 		{
 			timer = 0;
 
@@ -72,38 +74,7 @@ public:
 		}
 	}
 
-	/* void fire()
-	{
-
-		// if(Keyboard::isKeyPressed(Keyboard::Space))
-		// {
-		// 	b = new Bullet[10];
-		// 	b->x = sprite.getPosition().x+35;
-		// 	b->y = sprite.getPosition().y -25;
-		// 	b->sprite.setPosition(b->x,b->y);
-		// }
-		//  b->sprite.move(0,-10);
-			static int i = 0 ;
-		{
-		if(Keyboard::isKeyPressed(Keyboard::Space))
-			for(int i = 0 ; i < 50 ; i++)
-			{
-				if(b[i]->sprite.getPosition().y > 0)
-				{
-					continue ;
-				}
-				else
-				{
-					b[i]->x = sprite.getPosition().x+35;
-					b[i]->y = sprite.getPosition().y -25;
-					b[i]->sprite.setPosition(b[i]->x,b[i]->y);
-				}
-			}
-		}
-		b[i]->sprite.move(0,-10);
-		//  //if(b->sprite.getPosition().y<0)
-	}
-	 */
+	
 	void move(std::string s)
 	{
 		float checkDiagonal1 = 0;
@@ -177,21 +148,36 @@ public:
 
 		if (checkd1 == 1.1f && checkd2 == 1.1f)
 		{
-			sprite.setRotation(315);
+			
+			tex.loadFromFile("img/l.png");
+			sprite.setTexture(tex); 
+			//sprite.setRotation(315);
 		}
 		else if (checkd1 == 1.2f && checkd2 == 1.1f)
 		{
-			sprite.setRotation(45);
+			//sprite.setRotation(45);
+			tex.loadFromFile("img/r.png");
+			sprite.setTexture(tex);
+
 		}
 		else if (checkd2 == 1.2f && checkd1 == 1.1f)
 		{
-			sprite.setRotation(225);
+			tex.loadFromFile("img/lb.png");
+			sprite.setTexture(tex);
+			//sprite.setRotation(225);
 		}
 		else if (checkd2 == 1.2f && checkd1 == 1.2f)
 		{
-			sprite.setRotation(135);
+			//sprite.setRotation(135);
+			tex.loadFromFile("img/rb.png");
+			sprite.setTexture(tex);
+			
+		}
+		else {
+			tex.loadFromFile("img/player_ship.png");
+			sprite.setTexture(tex);
 		}
 
 	}
-
+	
 };
