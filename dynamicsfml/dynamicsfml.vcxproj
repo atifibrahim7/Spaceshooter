@@ -22,6 +22,7 @@
     <ClInclude Include="Spaceshooter\Addon.h" />
     <ClInclude Include="Spaceshooter\bomb.h" />
     <ClInclude Include="Spaceshooter\bullet.h" />
+    <ClInclude Include="Spaceshooter\dragon.h" />
     <ClInclude Include="Spaceshooter\Enemy.h" />
     <ClInclude Include="Spaceshooter\invader.h" />
     <ClInclude Include="Spaceshooter\monster.h" />

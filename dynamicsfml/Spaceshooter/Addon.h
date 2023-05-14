@@ -7,8 +7,13 @@ using namespace sf;
 
 
 class Addons
-{
+{	
+protected: 
+	int x;
+	int y;
 public  :
+	Texture Tex;
+	Sprite sprite;
 	int randomDrop() {
 		// create an mt19937 generator with a random seed
 		std::mt19937 rng(std::random_device{}());
@@ -22,17 +27,15 @@ public  :
 		return random_number;
 	}
 	virtual bool apply(Player& player) = 0;
-	virtual void drop() = 0;
+	virtual void drop(int & s) = 0;
 	virtual void draw(RenderWindow& window) = 0;
 	//virtual void activate() = 0;
 };
 
 class ShieldAddon : public Addons
 {	public:
-	Texture Tex;
-	Sprite sprite ;
-	int x; 
-	int y; 
+	
+	
 	ShieldAddon()
 	{	
 		//shield_Tex.loadFromFile("img/PNG/Effects/shield1.png");
@@ -43,7 +46,7 @@ class ShieldAddon : public Addons
 		x = 100;
 		y = 100;
 		sprite.setPosition(x, y);
-		std::cout << "Sheild created at " << x << "x "<< y <<"y \n";
+		//std::cout << "Sheild created at " << x << "x "<< y <<"y \n";
 
 	}
 	/*void activate() override
@@ -64,7 +67,7 @@ class ShieldAddon : public Addons
 		}
 		return false;
 	}
-	void drop() override
+	void drop(int& s) override
 	{
 		sprite.move(0, 5);
 		//std::cout << x << " " << y<<std::endl;
@@ -87,9 +90,8 @@ class ShieldAddon : public Addons
 class LivesAddon : public Addons
 {	
 public : 
-	Sprite sprite;
-	Texture Tex;
-	int x, y;
+	
+	
 	
 	LivesAddon()
 	{	
@@ -117,11 +119,13 @@ public :
 		return false;
 	}
 	
-	void drop() override
+	void drop(int& s) override
+
 	{
 		sprite.move(0, 2);
 		x = sprite.getPosition().x;
 		y = sprite.getPosition().y;
+		
 		if (y > 900)
 			sprite.setPosition(randomDrop() % 900, -2000);
 
@@ -135,10 +139,8 @@ public :
 class DangerAddon : public Addons
 {
 protected  : 
-	Texture Tex;
-	Sprite sprite;
-	int x;
-	int y;
+	
+	
 
 public : 
 	DangerAddon()
@@ -149,12 +151,17 @@ public :
 		y = 2000;
 		sprite.setPosition(x, y);
 	}
-	void drop() override
+	void drop(int& s) override
+
 	{
 		sprite.move(0, 4);
 		x = sprite.getPosition().x;
 		y = sprite.getPosition().y;
-		if (y > 900)
+		if (y == 900 || y == 902)
+		{
+			s += 5;
+		}
+		if (y > 910)
 			sprite.setPosition(randomDrop() % 900, -2000);
 
 	}
@@ -186,10 +193,7 @@ public :
 class FireAddon : public Addons
 {
 protected:
-	Texture Tex;
-	Sprite sprite;
-	int x;
-	int y;
+	
 
 public:
 	FireAddon()
@@ -200,12 +204,14 @@ public:
 		y = 2500;
 		sprite.setPosition(x, y);
 	}
-	void drop() override
+	void drop(int& s) override
+
 	{
 		sprite.move(0, 6);
 		x = sprite.getPosition().x;
 		y = sprite.getPosition().y;
-		if (y > 900)
+		
+		if (y > 920)
 			sprite.setPosition(randomDrop() % 900, -2500);
 
 	}
@@ -226,7 +232,7 @@ public:
 		}
 		return false;
 	}
-	void draw(RenderWindow& window)
+	void draw(RenderWindow& window) override
 	{
 		window.draw(sprite);
 	}

@@ -42,6 +42,9 @@
     <ClInclude Include="Spaceshooter\bomb.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="Spaceshooter\dragon.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Spaceshooter\main.cpp">

@@ -15,10 +15,12 @@ public:
     int x;
     int y;
     bool active;
-    friend class Enemy;
+    int angle;
+    int zz = 0;
     Bullet()
     {   
         active = true;
+        angle = 90;
         Tex.loadFromFile("img/PNG/Lasers/laser.png");
         sprite.setTexture(Tex);
       sprite.setRotation(90); 
@@ -31,11 +33,11 @@ public:
     {
         return bullet_damage;
     }
-    void move()
+   /* void move()
     {
-        y -= 7;
+        y -= 15;
         sprite.setPosition(x, y);
-    }
+    }*/
     void move_down()
     {
         y  += 10; 
@@ -48,6 +50,19 @@ public:
         return active;
     }
 
-  
+    void move() {
+        // use the stored angle instead of the current angle
+        float radians = angle * 3.14159265 / 180;
+        x += std::cos(radians) * 10;
+        y -= std::sin(radians) * 10;
+        sprite.setPosition(x, y);
+    }
+
+    // overload the move function to take an angle argument
+    void move(float newAngle) {
+        angle = newAngle;
+        move();
+    }
+
 };
 

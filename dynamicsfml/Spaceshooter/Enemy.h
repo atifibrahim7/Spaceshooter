@@ -9,39 +9,53 @@ using namespace sf;
 
 
 class Enemy
-{   
-private : 
-    bool active; 
-protected  :
-    int health; 
+{
+private:
+    bool active;
+    std::string type;
+protected:
+    int x, y;
+    int health;
     bool movement = false;
-public :
+    bool trigger;
+public:
     Texture Tex;
     Sprite sprite;
     Bomb* bomb;
-    Enemy ()
+    Sprite beam;
+    Texture b, b1, b2, b3;
+
+    Enemy()
     {
         bomb = new Bomb();
-        
-        if ( randomDrop() % 2  == 1)
-        {  
+        type = " ";
+        if (randomDrop() % 2 == 1)
+        {
             bomb->setActive(true);
-          //  bomb->sprite.setPosition(sprite.getPosition().x, sprite.getPosition().y);
-            std::cout << "Bomb created"<<std::endl;
+            //  bomb->sprite.setPosition(sprite.getPosition().x, sprite.getPosition().y);
+            std::cout << "Bomb created" << std::endl;
         }
         else
-        { 
+        {
             bomb->setActive(false);
         }
         active = true;
         health = 100;
 
-        
-        
+
+
     }
-  
-    
-  int randomDrop() {
+    std::string gettype()
+    {
+        return type;
+    }
+    void setType(std::string s)
+    {
+        type = s;
+    }
+    void setTrigger(bool s) { trigger = s; }
+    bool getTrigger() { return trigger; }
+    int randomDrop() {
         // create an mt19937 generator with a random seed
         std::mt19937 rng(std::random_device{}());
 
@@ -53,34 +67,23 @@ public :
 
         return random_number;
     }
-  virtual  bool  isActive() 
+    virtual  bool  isActive()
     {
-       return  active;
+        return  active;
     }
-   virtual void setActive(bool s)
+    virtual void setActive(bool s)
     {
         active = s;
     }
-        ~Enemy(){}
-      virtual  void moving()
-        {
-            // Check if sprite has reached the left or right edge of the screen
-            if (sprite.getPosition().x < 0 || sprite.getPosition().x > 830)
-            {
-                // Reverse direction of movement
-                movement = !movement;
-            }
+    ~Enemy() {}
+    virtual  void moving(RenderWindow& window) = 0;
+    virtual  void draw(RenderWindow& window) {};
+    virtual void beamformonster(RenderWindow& window) {}
+   /* bool getTrigger
+    {
+        return trigger;
+    }*/
 
-            // Move sprite in the appropriate direction
-            if (movement)
-            {
-                sprite.move(4, 0);
-            }
-            else
-            {
-                sprite.move(-4, 0);
-            }
-        }
 
 };
 

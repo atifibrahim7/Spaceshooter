@@ -25,8 +25,9 @@ public  :
 	
 	void drop()
 	{	
-
-		sprite.move(0, 2);
+		int x = rand() % 10;
+		std::cout << x << std::endl;
+		sprite.move(0, x);
 		/*if (sprite.getPosition().y > 900)
 		{
 			delete this;
