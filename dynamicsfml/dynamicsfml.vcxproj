@@ -32,7 +32,11 @@
     <ClInclude Include="Spaceshooter\player.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Spaceshooter\dragon.cpp" />
+    <ClCompile Include="Spaceshooter\enemy.cpp" />
+    <ClCompile Include="Spaceshooter\game.cpp" />
     <ClCompile Include="Spaceshooter\main.cpp" />
+    <ClCompile Include="Spaceshooter\menu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Spaceshooter\img\player_ship.png" />

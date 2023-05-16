@@ -238,3 +238,50 @@ public:
 		window.draw(sprite);
 	}
 };
+
+class Powerup : public Addons
+{
+public : 
+	Powerup()
+	{
+		Tex.loadFromFile("img/PNG/Power-ups/pill_red.png");
+		sprite.setTexture(Tex);
+		x = 300;
+		y = -2200;
+		sprite.setPosition(x, y);
+
+
+	}
+	void drop(int& s) override
+
+	{
+		sprite.move(0, 6);
+		x = sprite.getPosition().x;
+		y = sprite.getPosition().y;
+
+		if (y > 920)
+			sprite.setPosition(randomDrop() % 900, -2500);
+
+	}
+	bool apply(Player& player) override
+	{
+		//std::cout << "player " << player.x << " " << player.y <<"       "<<x <<" "<<y<<std::endl;
+
+
+		if (sprite.getGlobalBounds().intersects(player.sprite.getGlobalBounds()))
+		{
+		//	std::cout << "Lol Collision \n";
+			sprite.setPosition(randomDrop() % 900, -1800);
+
+			sprite.setPosition(randomDrop() % 900, -2000);
+
+			return true;
+
+		}
+		return false;
+	}
+	void draw(RenderWindow& window) override
+	{
+		window.draw(sprite);
+	}
+};
