@@ -26,6 +26,7 @@ public  :
 
 		return random_number;
 	}
+		
 	virtual bool apply(Player& player) = 0;
 	virtual void drop(int & s) = 0;
 	virtual void draw(RenderWindow& window) = 0;

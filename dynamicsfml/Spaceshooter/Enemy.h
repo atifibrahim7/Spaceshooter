@@ -33,7 +33,7 @@ public:
         {
             bomb->setActive(true);
             //  bomb->sprite.setPosition(sprite.getPosition().x, sprite.getPosition().y);
-            std::cout << "Bomb created" << std::endl;
+          //  std::cout << "Bomb created" << std::endl;
         }
         else
         {
@@ -75,14 +75,11 @@ public:
     {
         active = s;
     }
-    ~Enemy() {}
+    ~Enemy() { delete[] bomb; }
     virtual  void moving(RenderWindow& window) = 0;
     virtual  void draw(RenderWindow& window) {};
     virtual void beamformonster(RenderWindow& window) {}
-   /* bool getTrigger
-    {
-        return trigger;
-    }*/
+   
 
 
 };

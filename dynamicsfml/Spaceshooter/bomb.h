@@ -23,10 +23,9 @@ public  :
 		active = s; 
 	}
 	
-	void drop()
+	void drop(int x)
 	{	
-		int x = rand() % 10;
-		std::cout << x << std::endl;
+		
 		sprite.move(0, x);
 		/*if (sprite.getPosition().y > 900)
 		{

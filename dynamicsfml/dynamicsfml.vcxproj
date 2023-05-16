@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClInclude Include="Spaceshooter\Addon.h" />
     <ClInclude Include="Spaceshooter\bomb.h" />
+    <ClInclude Include="Spaceshooter\meteors.h" />
     <ClInclude Include="Spaceshooter\bullet.h" />
     <ClInclude Include="Spaceshooter\dragon.h" />
     <ClInclude Include="Spaceshooter\Enemy.h" />

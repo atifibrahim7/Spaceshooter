@@ -7,10 +7,6 @@ class Monster : public Enemy
 {   
     bool movement = false;
 public:
-  
-
-    
-
     bool active = false;
 
     Monster()
@@ -25,7 +21,7 @@ public:
         beam.setRotation(0);
         beam.setScale(1, 15);
         sprite.setScale(0.25, 0.25);
-        std::cout << "Monster created at " << sprite.getPosition().x << " " << sprite.getPosition().y;
+      //  std::cout << "Monster created at " << sprite.getPosition().x << " " << sprite.getPosition().y;
 
 
     }
@@ -45,7 +41,7 @@ public:
             sprite.move(4, 0);
             beam.setPosition(sprite.getPosition().x + 150, sprite.getPosition().y);
            // window.draw(beam);
-            std::cout << beam.getPosition().x + 100 << " " << beam.getPosition().y;
+           // std::cout << beam.getPosition().x + 100 << " " << beam.getPosition().y;
            
         }
         else
@@ -56,7 +52,7 @@ public:
           /*
           window.draw(beam);
             */
-            std::cout << beam.getPosition().x +50<< " " << beam.getPosition().y;
+          //  std::cout << beam.getPosition().x +50<< " " << beam.getPosition().y;
             draw(window);
 
 

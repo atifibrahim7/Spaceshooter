@@ -24,7 +24,7 @@ class Dragon : public Enemy
             beam.setRotation(0);
             beam.setScale(1, 2);
             sprite.setScale(0.5, 0.5);
-            std::cout << "Dragon created at " << sprite.getPosition().x << " " << sprite.getPosition().y;
+//            std::cout << "Dragon created at " << sprite.getPosition().x << " " << sprite.getPosition().y;
 
 
         }
@@ -62,7 +62,7 @@ class Dragon : public Enemy
             if (getTrigger())
             {       
                 sprite.setPosition(300, 100);
-                std::cout << "AAAAAAAAAAAAAAAAAAAAAA";
+              //  std::cout << "AAAAAAAAAAAAAAAAAAAAAA";
                
                 beam.setPosition(sprite.getPosition().x-75, sprite.getPosition().y+ 150);
                 draw(window);

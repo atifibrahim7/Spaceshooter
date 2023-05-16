@@ -1,9 +1,15 @@
-#include "menu.h"
+//#include "menu.h"
+#include "game.h"
 int main()
 {
-    
-    Menu m;
-    m.display_menu(); 
+    Game g;
+    do {
+        g.replay = 0;
+    bool flag = 0;
+    g.start_game(flag);
+    } while (g.replay);
+    //Menu m;
+   // m.display_menu(); 
     return 0;
 }
 

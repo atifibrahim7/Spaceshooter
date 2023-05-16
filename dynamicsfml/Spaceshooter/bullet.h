@@ -12,11 +12,11 @@ protected:
 public:
     Sprite sprite;
     Texture Tex;
-    int x;
-    int y;
     bool active;
     int angle;
     int zz = 0;
+    int x;
+    int y;
     Bullet()
     {   
         active = true;
@@ -62,6 +62,14 @@ public:
     void move(float newAngle) {
         angle = newAngle;
         move();
+    }
+    int getx()
+    {
+        return x;
+    }
+    int gety()
+    {
+        return y;
     }
 
 };
